@@ -1,0 +1,9 @@
+FROM envoyproxy/envoy-contrib-dev:9c16974a50a9fdc247653eea03a49da9367fa1d5
+
+COPY  --chmod=777 ./certs/postgres-frontend.example.com.crt /certs/clientcert.pem
+COPY  --chmod=777 ./certs/example.com.key /certs/clientkey.pem
+COPY --chmod=777 ./certs/postgres-backend.example.com.crt /certs/servercert.pem
+COPY --chmod=777 ./certs/example.com.key /certs/serverkey.pem
+COPY --chmod=777 ./certs/ca.crt /certs/cacert.pem
+
+CMD /usr/local/bin/envoy -c /etc/envoy/envoy.yaml -l info
